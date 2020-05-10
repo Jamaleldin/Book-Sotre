@@ -1,0 +1,27 @@
+1- Download Java 8 from here (File -> New -> Java Project -> in JRE section -> Use a project specific JRE -> choose JRE1.8.0_251 from the drop down list (if it's not there u can add it from Configure JREs under the drop down list))
+https://www.oracle.com/java/technologies/javase-jdk11-downloads.html
+
+2- Download Javafx 11 from here (Right Click on your project -> Build Path -> Add Libraries -> User Library -> select javafx)
+https://gluonhq.com/products/javafx/
+
+3- Download Scene Builder for Java 11 from here
+https://gluonhq.com/products/scene-builder/#download
+
+4- Download Jfoenix for java 8/9 from here (Right Click on your project -> Build Path -> Add External Archives -> get the downloaded jar from your directory)
+https://github.com/jfoenixadmin/JFoenix
+
+**Next Step if insalled versions are java 11 and jfoenix for java 9
+5- Insert the following in the VM Arguments in your project (Click on the arrow beside the Run button on eclipse -> Run Configurations -> Arguments tab -> VM Arguments)
+--module-path "E:\ProGrams\Javafx\javafx-sdk-11.0.2\lib" --add-modules javafx.base,javafx.controls,javafx.fxml,javafx.graphics,javafx.media,javafx.swing,javafx.web
+--add-opens
+javafx.base/com.sun.javafx.runtime=ALL-UNNAMED
+--add-opens
+javafx.controls/com.sun.javafx.scene.control.behavior=ALL-UNNAMED
+--add-opens
+javafx.controls/com.sun.javafx.scene.control=ALL-UNNAMED
+--add-opens
+javafx.base/com.sun.javafx.binding=ALL-UNNAMED
+--add-opens
+javafx.base/com.sun.javafx.event=ALL-UNNAMED
+--add-opens
+javafx.graphics/com.sun.javafx.stage=ALL-UNNAMED
