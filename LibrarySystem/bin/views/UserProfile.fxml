@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXPasswordField?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/8.0.251" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.UserProfileController">
+   <children>
+      <ImageView fitHeight="378.0" fitWidth="640.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../icons/notepad-691250_640.jpg" />
+         </image>
+      </ImageView>
+      <GridPane layoutX="14.0" layoutY="71.0" prefHeight="293.0" prefWidth="200.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <JFXTextField fx:id="usernameTxt" editable="false" focusColor="AQUAMARINE" labelFloat="true" promptText="Username" style="-fx-prompt-text-fill: aquamarine; -fx-text-inner-color: cyan;" unFocusColor="AQUA" />
+            <JFXTextField fx:id="firstNameTxt" editable="false" focusColor="AQUAMARINE" labelFloat="true" promptText="First Name" style="-fx-prompt-text-fill: aquamarine; -fx-text-inner-color: cyan;" unFocusColor="AQUA" GridPane.rowIndex="1" />
+            <JFXTextField fx:id="lastNameTxt" editable="false" focusColor="AQUAMARINE" labelFloat="true" promptText="Last Name" style="-fx-prompt-text-fill: aquamarine; -fx-text-inner-color: cyan;" unFocusColor="AQUA" GridPane.rowIndex="2" />
+            <JFXTextField fx:id="emailAddrTxt" editable="false" focusColor="AQUAMARINE" labelFloat="true" promptText="E-mail Address" style="-fx-prompt-text-fill: aquamarine; -fx-text-inner-color: cyan;" unFocusColor="AQUA" GridPane.rowIndex="3" />
+            <JFXTextField fx:id="phoneNumTxt" editable="false" focusColor="AQUAMARINE" labelFloat="true" promptText="Phone Number" style="-fx-prompt-text-fill: aquamarine; -fx-text-inner-color: cyan;" unFocusColor="AQUA" GridPane.rowIndex="4" />
+            <JFXTextField fx:id="shippingAddrTxt" editable="false" focusColor="AQUAMARINE" labelFloat="true" prefWidth="200.0" promptText="Shipping Address" style="-fx-prompt-text-fill: aquamarine; -fx-text-inner-color: cyan;" unFocusColor="AQUA" GridPane.rowIndex="5" />
+         </children>
+      </GridPane>
+      <GridPane layoutX="364.0" layoutY="68.0" prefHeight="186.0" prefWidth="200.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <JFXPasswordField fx:id="oldPassTxt" focusColor="AQUAMARINE" labelFloat="true" promptText="Old Password" style="-fx-prompt-text-fill: aquamarine; -fx-text-inner-color: cyan;" unFocusColor="AQUA" visible="false" />
+            <JFXPasswordField fx:id="newPassTxt" editable="false" focusColor="AQUAMARINE" labelFloat="true" promptText="Your Password" style="-fx-prompt-text-fill: aquamarine; -fx-text-inner-color: cyan;" unFocusColor="AQUA" GridPane.rowIndex="1" />
+            <JFXPasswordField fx:id="confirmNewPassTxt" focusColor="AQUAMARINE" labelFloat="true" promptText="Confirm Password" style="-fx-prompt-text-fill: aquamarine; -fx-text-inner-color: cyan;" unFocusColor="AQUA" visible="false" GridPane.rowIndex="2" />
+         </children>
+      </GridPane>
+      <JFXButton fx:id="editDataBtn" buttonType="RAISED" layoutX="101.0" layoutY="46.0" onAction="#enableEditData" text="Edit Personal Data" textFill="AQUA" underline="true" />
+      <JFXButton fx:id="changePassBtn" buttonType="RAISED" layoutX="454.0" layoutY="46.0" onAction="#enableChangePass" text="Change Password" textFill="AQUA" underline="true" />
+      <JFXButton fx:id="saveBtn" buttonType="RAISED" disable="true" layoutX="585.0" layoutY="339.0" onAction="#saveData" style="-fx-border-color: cyan; -fx-border-radius: 15;" text="Save" textFill="AQUA" />
+   </children>
+</AnchorPane>

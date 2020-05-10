@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXToggleButton?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/8.0.251" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.CustomerMainPageController">
+   <children>
+      <ImageView fitHeight="500.0" fitWidth="750.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../icons/library-488678_1280.jpg" />
+         </image></ImageView>
+      <GridPane layoutX="120.0" layoutY="14.0" prefHeight="30.0" prefWidth="510.0">
+         <columnConstraints>
+            <ColumnConstraints halignment="CENTER" maxWidth="116.0" minWidth="0.0" prefWidth="100.0" />
+            <ColumnConstraints halignment="CENTER" maxWidth="206.0" minWidth="16.0" prefWidth="87.0" />
+            <ColumnConstraints maxWidth="46.0" minWidth="11.0" prefWidth="18.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="182.0" minWidth="10.0" prefWidth="139.0" />
+            <ColumnConstraints halignment="CENTER" maxWidth="109.0" minWidth="16.0" prefWidth="72.0" />
+            <ColumnConstraints halignment="CENTER" maxWidth="109.0" minWidth="16.0" prefWidth="100.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" />
+         </rowConstraints>
+         <children>
+            <JFXButton fx:id="cartBtn" buttonType="RAISED" nodeOrientation="LEFT_TO_RIGHT" onAction="#showCart" style="-fx-background-color: red; -fx-border-color: #ffff00; -fx-border-radius: 15; -fx-background-radius: 15;" text="0" textFill="YELLOW" GridPane.columnIndex="4">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+               <graphic>
+                  <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../icons/shop-cart-icon.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </JFXButton>
+            <JFXButton fx:id="profileBtn" buttonType="RAISED" nodeOrientation="LEFT_TO_RIGHT" onAction="#showProfile" style="-fx-background-color: #ffffff00; -fx-border-color: #ffff00; -fx-border-radius: 15; -fx-background-radius: 15;" text="Profile" textFill="YELLOW">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+               <graphic>
+                  <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../icons/Profile-icon.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </JFXButton>
+            <JFXButton fx:id="orderBtn" buttonType="RAISED" nodeOrientation="LEFT_TO_RIGHT" onAction="#createOrder" style="-fx-background-color: #ffffff00; -fx-border-color: #ffff00; -fx-border-radius: 15; -fx-background-radius: 15;" text="Order" textFill="YELLOW" GridPane.columnIndex="1">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+               <graphic>
+                  <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../icons/Order-history-icon.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </JFXButton>
+            <JFXButton fx:id="logoutBtn" buttonType="RAISED" contentDisplay="RIGHT" onAction="#logout" style="-fx-border-color: yellow; -fx-border-radius: 15;" text="Log Out" textFill="YELLOW" GridPane.columnIndex="5">
+               <graphic>
+                  <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../icons/logout-icon.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </JFXButton>
+         </children>
+      </GridPane>
+      <GridPane layoutX="14.0" layoutY="65.0" prefHeight="236.0" prefWidth="183.0">
+        <columnConstraints>
+          <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="95.0" minWidth="10.0" prefWidth="40.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="140.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints maxHeight="35.0" minHeight="10.0" prefHeight="25.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="67.0" minHeight="10.0" prefHeight="45.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="62.0" minHeight="10.0" prefHeight="45.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="68.0" minHeight="10.0" prefHeight="45.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="45.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="45.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../icons/Search-icon.png" />
+               </image>
+            </ImageView>
+            <JFXToggleButton fx:id="ISBNToggle" onAction="#enableISBNSearch" size="8.0" text=" " textFill="YELLOW" toggleColor="WHITE" toggleLineColor="DEEPSKYBLUE" unToggleColor="WHITE" unToggleLineColor="GREY" GridPane.rowIndex="1" />
+            <JFXToggleButton fx:id="titleToggle" onAction="#enableTitleSearch" size="8.0" text=" " textFill="YELLOW" toggleColor="WHITE" toggleLineColor="DEEPSKYBLUE" unToggleColor="WHITE" unToggleLineColor="GREY" GridPane.rowIndex="2" />
+            <JFXToggleButton fx:id="categoryToggle" onAction="#enableCategorySearch" size="8.0" text=" " textFill="YELLOW" toggleColor="WHITE" toggleLineColor="DEEPSKYBLUE" unToggleColor="WHITE" unToggleLineColor="GREY" GridPane.rowIndex="3" />
+            <JFXToggleButton fx:id="authorToggle" onAction="#enableAuthorSearch" size="8.0" text=" " textFill="YELLOW" toggleColor="WHITE" toggleLineColor="DEEPSKYBLUE" unToggleColor="WHITE" unToggleLineColor="GREY" GridPane.rowIndex="4" />
+            <JFXToggleButton fx:id="publisherToggle" onAction="#enablePublisherSearch" size="8.0" text=" " textFill="YELLOW" toggleColor="WHITE" toggleLineColor="DEEPSKYBLUE" unToggleColor="WHITE" unToggleLineColor="GREY" GridPane.rowIndex="5" />
+            <Text fill="AQUA" strokeType="OUTSIDE" strokeWidth="0.0" text="Search for a Book" GridPane.columnIndex="1">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Text>
+            <JFXComboBox fx:id="ISBNCbx" disable="true" focusColor="AQUAMARINE" labelFloat="true" prefHeight="25.0" prefWidth="138.0" promptText="By ISBN" style="-fx-prompt-text-fill: lightcyan;" unFocusColor="AQUA" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <JFXComboBox fx:id="titleCbx" disable="true" focusColor="AQUAMARINE" labelFloat="true" prefHeight="25.0" prefWidth="138.0" promptText="By Title" style="-fx-prompt-text-fill: lightcyan;" unFocusColor="AQUA" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <JFXComboBox fx:id="categoryCbx" disable="true" focusColor="AQUAMARINE" labelFloat="true" prefHeight="25.0" prefWidth="138.0" promptText="By Category" style="-fx-prompt-text-fill: lightcyan;" unFocusColor="AQUA" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <JFXComboBox fx:id="authorCbx" disable="true" focusColor="AQUAMARINE" labelFloat="true" prefHeight="25.0" prefWidth="137.0" promptText="By Author" style="-fx-prompt-text-fill: lightcyan;" unFocusColor="AQUA" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <JFXComboBox fx:id="publisherCbx" disable="true" focusColor="AQUAMARINE" labelFloat="true" prefHeight="25.0" prefWidth="138.0" promptText="By Publisher" style="-fx-prompt-text-fill: lightcyan;" unFocusColor="AQUA" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+         </children>
+      </GridPane>
+      <Separator layoutX="215.0" layoutY="65.0" orientation="VERTICAL" prefHeight="426.0" prefWidth="5.0" />
+      <TableView fx:id="booksTable" layoutX="220.0" layoutY="65.0" prefHeight="426.0" prefWidth="522.0" stylesheets="@TableViewStyle.css">
+        <columns>
+            <TableColumn fx:id="selectCol" prefWidth="27.0" />
+          <TableColumn fx:id="ISBNCol" prefWidth="43.0" text="ISBN" />
+          <TableColumn fx:id="titleCol" prefWidth="73.0" text="Title" />
+            <TableColumn fx:id="authorCol" prefWidth="73.0" text="Author" />
+            <TableColumn fx:id="publisherCol" prefWidth="67.0" text="Publisher" />
+            <TableColumn fx:id="pubYearCol" prefWidth="82.0" text="Pub. Year" />
+            <TableColumn fx:id="priceCol" prefWidth="59.0" text="Price" />
+            <TableColumn fx:id="categoryCol" prefWidth="96.0" text="Category" />
+        </columns>
+      </TableView>
+      <JFXButton fx:id="searchBtn" buttonType="RAISED" layoutX="153.0" layoutY="313.0" onAction="#search" style="-fx-border-color: cyan; -fx-border-radius: 15;" text="Search" textFill="AQUA" />
+   </children>
+</AnchorPane>
