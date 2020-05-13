@@ -1,10 +1,10 @@
-package application;
+package mainClasses;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.util.Iterator;
+
+import application.Book;
 
 
 public class DatabaseFunctions {
@@ -43,6 +43,8 @@ public class DatabaseFunctions {
 			e.printStackTrace();
 		}
     }
+	
+	
 	
 	//Dealing with Database functions
 	public void insertBook(String tblName, Book newBook) {
