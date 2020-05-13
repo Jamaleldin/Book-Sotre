@@ -1,6 +1,8 @@
+CREATE DATABASE  IF NOT EXISTS `bookstore` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
+USE `bookstore`;
 -- MySQL dump 10.13  Distrib 8.0.18, for Win64 (x86_64)
 --
--- Host: 127.0.0.1    Database: book_store
+-- Host: 127.0.0.1    Database: bookstore
 -- ------------------------------------------------------
 -- Server version	8.0.18
 
@@ -16,32 +18,33 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `sales`
+-- Table structure for table `users`
 --
 
-DROP TABLE IF EXISTS `sales`;
+DROP TABLE IF EXISTS `users`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `sales` (
-  `purchase_date` datetime NOT NULL,
-  `user_id` int(11) NOT NULL,
-  `ISBN` int(11) NOT NULL,
-  `quantity` int(11) DEFAULT NULL,
-  PRIMARY KEY (`purchase_date`,`user_id`,`ISBN`),
-  KEY `sales_userid_fk_idx` (`user_id`),
-  KEY `sales_isbn_fk_idx` (`ISBN`),
-  CONSTRAINT `sales_isbn_fk` FOREIGN KEY (`ISBN`) REFERENCES `books` (`ISBN`),
-  CONSTRAINT `sales_userid_fk` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`)
+CREATE TABLE `users` (
+  `user_name` varchar(10) NOT NULL,
+  `password` varchar(45) NOT NULL,
+  `status` tinyint(1) NOT NULL,
+  `first_name` varchar(45) DEFAULT NULL,
+  `last_name` varchar(45) DEFAULT NULL,
+  `email` varchar(45) DEFAULT NULL,
+  `phone_number` varchar(15) DEFAULT NULL,
+  `shipping_address` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`user_name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `sales`
+-- Dumping data for table `users`
 --
 
-LOCK TABLES `sales` WRITE;
-/*!40000 ALTER TABLE `sales` DISABLE KEYS */;
-/*!40000 ALTER TABLE `sales` ENABLE KEYS */;
+LOCK TABLES `users` WRITE;
+/*!40000 ALTER TABLE `users` DISABLE KEYS */;
+INSERT INTO `users` VALUES ('hazem','zoma',1,'hazem','morsy','zoma14@gmail.com','122554','NY');
+/*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -53,4 +56,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-05-09  4:14:52
+-- Dump completed on 2020-05-13  6:39:33

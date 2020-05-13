@@ -1,6 +1,8 @@
+CREATE DATABASE  IF NOT EXISTS `bookstore` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
+USE `bookstore`;
 -- MySQL dump 10.13  Distrib 8.0.18, for Win64 (x86_64)
 --
--- Host: 127.0.0.1    Database: book_store
+-- Host: 127.0.0.1    Database: bookstore
 -- ------------------------------------------------------
 -- Server version	8.0.18
 
@@ -16,28 +18,32 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `publisher`
+-- Table structure for table `sales`
 --
 
-DROP TABLE IF EXISTS `publisher`;
+DROP TABLE IF EXISTS `sales`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `publisher` (
-  `publisher_name` varchar(45) NOT NULL,
-  `address` varchar(100) DEFAULT NULL,
-  `phone` varchar(15) DEFAULT NULL,
-  PRIMARY KEY (`publisher_name`)
+CREATE TABLE `sales` (
+  `purchase_date` datetime NOT NULL,
+  `user_name` varchar(10) NOT NULL,
+  `ISBN` int(11) NOT NULL,
+  `quantity` int(11) DEFAULT NULL,
+  PRIMARY KEY (`purchase_date`,`user_name`,`ISBN`),
+  KEY `sales_username_fk_idx` (`user_name`),
+  KEY `sales_isbn_fk_idx` (`ISBN`),
+  CONSTRAINT `sales_isbn_fk` FOREIGN KEY (`ISBN`) REFERENCES `books` (`ISBN`),
+  CONSTRAINT `sales_username_fk` FOREIGN KEY (`user_name`) REFERENCES `users` (`user_name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `publisher`
+-- Dumping data for table `sales`
 --
 
-LOCK TABLES `publisher` WRITE;
-/*!40000 ALTER TABLE `publisher` DISABLE KEYS */;
-INSERT INTO `publisher` VALUES ('pub1','NY','123'),('pub2','CH','456'),('pub3','CL','789');
-/*!40000 ALTER TABLE `publisher` ENABLE KEYS */;
+LOCK TABLES `sales` WRITE;
+/*!40000 ALTER TABLE `sales` DISABLE KEYS */;
+/*!40000 ALTER TABLE `sales` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -49,4 +55,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-05-09  4:14:50
+-- Dump completed on 2020-05-13  6:39:34
