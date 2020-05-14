@@ -10,34 +10,33 @@ import javafx.fxml.FXML;
 
 public class AddBookController {
 
-    @FXML
-    private JFXTextField ISBNTxt;
+	@FXML
+	private JFXTextField ISBNTxt;
 
-    @FXML
-    private JFXTextField titleTxt;
+	@FXML
+	private JFXTextField titleTxt;
 
-    @FXML
-    private JFXTextField authorNameTxt;
+	@FXML
+	private JFXTextField authorNameTxt;
 
-    @FXML
-    private JFXTextField publisherTxt;
+	@FXML
+	private JFXTextField publisherTxt;
 
-    @FXML
-    private JFXDatePicker publicationDate;
+	@FXML
+	private JFXDatePicker publicationDate;
 
-    @FXML
-    private JFXComboBox<?> categoryCbx;
+	@FXML
+	private JFXComboBox<?> categoryCbx;
 
-    @FXML
-    private JFXTextField priceTxt;
+	@FXML
+	private JFXTextField priceTxt;
 
-    @FXML
-    private JFXButton addBookBtn;
+	@FXML
+	private JFXButton addBookBtn;
 
-    @FXML
-    void addBook(ActionEvent event) {
+	@FXML
+	void addBook(ActionEvent event) {
 
-    }
+	}
 
 }
-

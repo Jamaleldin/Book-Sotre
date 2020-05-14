@@ -8,11 +8,10 @@ import java.sql.Statement;
 import java.util.LinkedList;
 import java.util.List;
 
-
 public class Customer {
 
-	private DatabaseFunctions DBFunctions = new DatabaseFunctions();
-	private Connection custConnection = null;
+	private DatabaseFunctions DBFunctions;
+	private Connection custConnection;
 	private String username;
 	private String password;
 	private boolean status;
@@ -21,10 +20,21 @@ public class Customer {
 	private String email;
 	private String phonenumber;
 	private String address;
-	private List<BooksModel> shoopingCart = new LinkedList<BooksModel>();
+	private List<BooksModel> shoopingCart;
 
 	public Customer() {
-		custConnection = DBFunctions.createConnection("bookstore", "root", "hazem");
+		DBFunctions = new DatabaseFunctions();
+		custConnection = null;
+		setCustConnection(DBFunctions.createConnection("bookstore", "root", "root"));
+		shoopingCart = new LinkedList<BooksModel>();
+	}
+
+	protected Connection getCustConnection() {
+		return custConnection;
+	}
+
+	public void setCustConnection(Connection custConnection) {
+		this.custConnection = custConnection;
 	}
 
 	// setters and getters of private data
@@ -96,7 +106,7 @@ public class Customer {
 		String selectQuery = "select count(*) from users where user_name = \"" + username + "\";";
 
 		try {
-			Statement stat = custConnection.createStatement();
+			Statement stat = getCustConnection().createStatement();
 			ResultSet rSet = stat.executeQuery(selectQuery);
 			while (rSet.next()) {
 				return true;
@@ -122,7 +132,7 @@ public class Customer {
 				+ firstname + "\",\"" + lastname + "\",\"" + email + "\",\"" + phone + "\",\"" + address + "\");";
 
 		try {
-			PreparedStatement stat = custConnection.prepareStatement(insertstat);
+			PreparedStatement stat = getCustConnection().prepareStatement(insertstat);
 			stat.execute();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -133,7 +143,7 @@ public class Customer {
 
 	public void editData(String username, String password, String firstname, String lastname, String email,
 			String phone, String address) {
-		
+
 		String updateStat = "update users set ";
 		String temp = "";
 		if (username.trim() != "") {
@@ -161,7 +171,7 @@ public class Customer {
 		temp = temp.substring(0, temp.length() - 1) + ";";
 		updateStat += temp;
 		try {
-			PreparedStatement stat = custConnection.prepareStatement(updateStat);
+			PreparedStatement stat = getCustConnection().prepareStatement(updateStat);
 			stat.executeUpdate();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -175,7 +185,7 @@ public class Customer {
 				+ password + "\" && status = " + false + ";";
 		int rowsCount = 0;
 		try {
-			Statement stat = custConnection.createStatement();
+			Statement stat = getCustConnection().createStatement();
 			ResultSet rSet = stat.executeQuery(selectQuery);
 
 			while (rSet.next()) {
@@ -214,16 +224,15 @@ public class Customer {
 		if (temp.trim() != "") {
 			temp = temp.substring(0, temp.length() - 2) + ";";
 			selectQuery += (where + temp);
-		}
-		else {
+		} else {
 			selectQuery += ";";
 		}
 		List<BooksModel> searchedBooks = new LinkedList<BooksModel>();
-		
+
 		try {
-			Statement stat = custConnection.createStatement();
+			Statement stat = getCustConnection().createStatement();
 			ResultSet rSet = stat.executeQuery(selectQuery);
-			while(rSet.next()) {
+			while (rSet.next()) {
 				BooksModel bookTemp = new BooksModel();
 				bookTemp.setISBN(rSet.getInt(1));
 				bookTemp.setTitle(rSet.getString(2));
@@ -240,7 +249,6 @@ public class Customer {
 			e.printStackTrace();
 		}
 		return searchedBooks;
-		
 
 	}
 
@@ -260,7 +268,7 @@ public class Customer {
 		Statement stat;
 		BooksModel curBook = new BooksModel();
 		try {
-			stat = custConnection.createStatement();
+			stat = getCustConnection().createStatement();
 			ResultSet rSet = stat.executeQuery(selectQuery);
 
 			while (rSet.next()) {
@@ -307,7 +315,7 @@ public class Customer {
 
 		try {
 			shoopingCart.clear();
-			custConnection.close();
+			getCustConnection().close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
