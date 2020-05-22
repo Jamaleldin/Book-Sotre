@@ -23,18 +23,26 @@ public class Customer {
 	private List<BooksModel> shoopingCart;
 
 	public Customer() {
-		DBFunctions = new DatabaseFunctions();
+		setDBFunctions(new DatabaseFunctions());
 		custConnection = null;
-		setCustConnection(DBFunctions.createConnection("bookstore", "root", "root"));
+		setCustConnection(getDBFunctions().createConnection("bookstore", "root", "root"));
 		shoopingCart = new LinkedList<BooksModel>();
 	}
 
-	protected Connection getCustConnection() {
+	public Connection getCustConnection() {
 		return custConnection;
 	}
 
 	public void setCustConnection(Connection custConnection) {
 		this.custConnection = custConnection;
+	}
+
+	public DatabaseFunctions getDBFunctions() {
+		return DBFunctions;
+	}
+
+	public void setDBFunctions(DatabaseFunctions dBFunctions) {
+		DBFunctions = dBFunctions;
 	}
 
 	// setters and getters of private data

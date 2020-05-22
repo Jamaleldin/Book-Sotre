@@ -27,4 +27,36 @@ public class Manager extends Customer {
 		}
 		return (rowsCount == 1);
 	}
+
+	public void insertBook(String tblName, BooksModel newBook) {
+		getDBFunctions().insertBook(tblName, newBook, getCustConnection());
+	}
+
+	public void modifyBook(String tblName, BooksModel book, int oldISBN) {
+		getDBFunctions().updateBook(tblName, book, oldISBN, getCustConnection());
+	}
+
+	public void deleteBook(String tblName, BooksModel book) {
+		getDBFunctions().deleteBook(tblName, book, getCustConnection());
+	}
+
+	public void promoteUser(String userName) {
+		String query = "update users set status = 1 where user_name = \'" + userName + "\';";
+		try {
+			Statement stat = getCustConnection().createStatement();
+			stat.executeQuery(query);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void confirmOrder(String userName, int ISBN) {
+		String query = "delete from book_orders where user_name = \'" + userName + "\' and ISBN = " + ISBN + ";";
+		try {
+			Statement stat = getCustConnection().createStatement();
+			stat.executeQuery(query);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
 }

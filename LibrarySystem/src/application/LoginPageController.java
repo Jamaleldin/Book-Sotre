@@ -101,4 +101,35 @@ public class LoginPageController {
 		}
 	}
 
+	@FXML
+	void enterNewCustomer(ActionEvent event) {
+		Main.customer = new Customer();
+		if (!newCustConfPassTxt.getText().isEmpty() && !newCustPassTxt.getText().isEmpty()) {
+			if (!newCustConfPassTxt.getText().isEmpty()
+					&& newCustConfPassTxt.getText().equals(newCustPassTxt.getText())) {
+				if (!firstNameTxt.getText().isEmpty() && !lastNameTxt.getText().isEmpty()) {
+					if (!emailAddrTxt.getText().isEmpty() && !phoneNumTxt.getText().isEmpty()) {
+						if (!shippingAddrTxt.getText().isEmpty()) {
+							Main.customer.custSignUp(newCustNameTxt.getText(), newCustPassTxt.getText(),
+									firstNameTxt.getText(), lastNameTxt.getText(), emailAddrTxt.getText(),
+									phoneNumTxt.getText(), shippingAddrTxt.getText());
+							try {
+								FXMLLoader fxmlLoader = new FXMLLoader(
+										getClass().getResource("/views/CustomerMainPage.fxml"));
+								Parent root1 = (Parent) fxmlLoader.load();
+								// This line gets the previous stage info to change it with the new one
+								Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+								stage.setScene(new Scene(root1));
+								stage.setResizable(false);
+								stage.show();
+							} catch (Exception e) {
+								e.printStackTrace();
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+
 }

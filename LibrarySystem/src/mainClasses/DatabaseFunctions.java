@@ -3,11 +3,9 @@ package mainClasses;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-
-import application.Book;
+import java.sql.Statement;
 
 public class DatabaseFunctions {
-
 	// Connection related functions
 	/**
 	 * Function to connect to the database and return the connection
@@ -47,16 +45,40 @@ public class DatabaseFunctions {
 	}
 
 	// Dealing with Database functions
-	public void insertBook(String tblName, Book newBook) {
-		/* Insert the data */
+	public void insertBook(String tblName, BooksModel newBook, Connection connection) {
+		String insertBookQuery = "insert into " + tblName + " values (" + newBook.getISBN() + "," + "'"
+				+ newBook.getPublisherName() + "'" + "," + newBook.getPublicationYear() + "," + newBook.getPrice() + ","
+				+ "'" + newBook.getCategory() + "'" + "," + newBook.getNoCopies() + "," + newBook.getThreshold() + ");";
+		try {
+			Statement statement = connection.createStatement();
+			statement.execute(insertBookQuery);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 
-	public void updateBook(String tblName, Book book) {
-		/* Update the data */
+	public void updateBook(String tblName, BooksModel book, int oldISBN, Connection connection) {
+		String updateBookQuery = "update " + tblName + "set ISBN = " + book.getISBN() + "," + "publisher = "
+				+ book.getPublisherName() + "," + "title = " + book.getTitle() + "," + "publication_year = "
+				+ book.getPublicationYear() + "," + "price = " + book.getPrice() + "," + "category = "
+				+ book.getCategory() + "," + "no_copies = " + book.getNoCopies() + "," + "threshold_quantity = "
+				+ book.getThreshold() + " where ISBN = " + oldISBN + ";";
+		try {
+			Statement statement = connection.createStatement();
+			statement.execute(updateBookQuery);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 
-	public void deleteBook(String tblName, Book book) {
-		/* Delete the data */
+	public void deleteBook(String tblName, BooksModel book, Connection connection) {
+		String deleteBookQuery = "delete from " + tblName + " where ISBN = " + book.getISBN();
+		try {
+			Statement statement = connection.createStatement();
+			statement.execute(deleteBookQuery);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 
 }
