@@ -63,8 +63,8 @@ public class LoginPageController {
 
 	@FXML
 	void enterCustomer(ActionEvent event) {
-		String customerName = custNameTxt.getText();
-		String customerPassword = custPassTxt.getText();
+		String customerName = custNameTxt.getText().trim();
+		String customerPassword = custPassTxt.getText().trim();
 		Main.customer = new Customer();
 		if (Main.customer.checkUser(customerName, customerPassword)) {
 			try {
@@ -83,8 +83,8 @@ public class LoginPageController {
 
 	@FXML
 	void enterManager(ActionEvent event) {
-		String managerName = mngNameTxt.getText();
-		String managerPassword = mngPassTxt.getText();
+		String managerName = mngNameTxt.getText().trim();
+		String managerPassword = mngPassTxt.getText().trim();
 		Main.manager = new Manager();
 		if (Main.manager.checkUser(managerName, managerPassword)) {
 			try {
@@ -110,9 +110,9 @@ public class LoginPageController {
 				if (!firstNameTxt.getText().isEmpty() && !lastNameTxt.getText().isEmpty()) {
 					if (!emailAddrTxt.getText().isEmpty() && !phoneNumTxt.getText().isEmpty()) {
 						if (!shippingAddrTxt.getText().isEmpty()) {
-							Main.customer.custSignUp(newCustNameTxt.getText(), newCustPassTxt.getText(),
-									firstNameTxt.getText(), lastNameTxt.getText(), emailAddrTxt.getText(),
-									phoneNumTxt.getText(), shippingAddrTxt.getText());
+							if(Main.customer.custSignUp(newCustNameTxt.getText().trim(), newCustPassTxt.getText().trim(),
+									firstNameTxt.getText().trim(), lastNameTxt.getText().trim(), emailAddrTxt.getText().trim(),
+									phoneNumTxt.getText().trim(), shippingAddrTxt.getText().trim())) {
 							try {
 								FXMLLoader fxmlLoader = new FXMLLoader(
 										getClass().getResource("/views/CustomerMainPage.fxml"));
@@ -125,6 +125,7 @@ public class LoginPageController {
 							} catch (Exception e) {
 								e.printStackTrace();
 							}
+						}
 						}
 					}
 				}

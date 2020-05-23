@@ -25,7 +25,7 @@ public class Customer {
 	public Customer() {
 		setDBFunctions(new DatabaseFunctions());
 		custConnection = null;
-		setCustConnection(getDBFunctions().createConnection("bookstore", "root", "root"));
+		//setCustConnection(getDBFunctions().createConnection("bookstore", "root", "root"));
 		shoopingCart = new LinkedList<BooksModel>();
 	}
 
@@ -111,12 +111,14 @@ public class Customer {
 	}
 
 	private boolean userExist(String username) {
-		String selectQuery = "select count(*) from users where user_name = \"" + username + "\";";
+		Connection conn = DBFunctions.createConnection();
+		String selectQuery = "select user_name from users where user_name = \"" + username + "\";";
 
 		try {
-			Statement stat = getCustConnection().createStatement();
+			Statement stat = conn.createStatement();
 			ResultSet rSet = stat.executeQuery(selectQuery);
 			while (rSet.next()) {
+				DBFunctions.closeConnection(conn);
 				return true;
 			}
 
@@ -128,30 +130,37 @@ public class Customer {
 
 	}
 
-	public void custSignUp(String username, String password, String firstname, String lastname, String email,
+	public boolean custSignUp(String username, String password, String firstname, String lastname, String email,
 			String phone, String address) {
 
+		Connection conn = DBFunctions.createConnection();
 		if (userExist(username)) {
 			System.out.println("cannot insert user exists before");
-			return;
+			return false;
 		}
 
-		String insertstat = "insert into users values ( \"" + username + "\",\"" + password + "\"," + false + ",\""
+		String insertstat = "insert into users ( user_name , password , status , first_name , last_name , "
+				+ "email , phone_number , shipping_address ) values ( \"" + username + "\",\"" + password + "\"," + false + ",\""
 				+ firstname + "\",\"" + lastname + "\",\"" + email + "\",\"" + phone + "\",\"" + address + "\");";
 
 		try {
-			PreparedStatement stat = getCustConnection().prepareStatement(insertstat);
+			PreparedStatement stat = conn.prepareStatement(insertstat);
 			stat.execute();
+			System.out.println("new customer inserted");
+			DBFunctions.closeConnection(conn);
+			return true;
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		return false;
 
 	}
 
 	public void editData(String username, String password, String firstname, String lastname, String email,
 			String phone, String address) {
 
+		Connection conn = DBFunctions.createConnection();
 		String updateStat = "update users set ";
 		String temp = "";
 		if (username.trim() != "") {
@@ -179,8 +188,9 @@ public class Customer {
 		temp = temp.substring(0, temp.length() - 1) + ";";
 		updateStat += temp;
 		try {
-			PreparedStatement stat = getCustConnection().prepareStatement(updateStat);
+			PreparedStatement stat = conn.prepareStatement(updateStat);
 			stat.executeUpdate();
+			DBFunctions.closeConnection(conn);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -188,18 +198,21 @@ public class Customer {
 
 	}
 
-	public boolean checkUser(String username, String password) {
+	
+    public boolean checkUser(String username, String password) {
+		Connection conn =  DBFunctions.createConnection();
 		String selectQuery = "select count(*) from users where user_name = \"" + username + "\" && password = \""
 				+ password + "\" && status = " + false + ";";
 		int rowsCount = 0;
 		try {
-			Statement stat = getCustConnection().createStatement();
+			Statement stat = conn.createStatement();
 			ResultSet rSet = stat.executeQuery(selectQuery);
 
 			while (rSet.next()) {
 				rowsCount += rSet.getInt(1);
 				setUsername(username);
 			}
+			DBFunctions.closeConnection(conn);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -210,7 +223,7 @@ public class Customer {
 
 	public List<BooksModel> getSearchedBooks(int bookISBN, String title, String publisher, String pubYear,
 			String category) {
-
+		Connection conn = DBFunctions.createConnection();
 		String selectQuery = "select * from books";
 		String where = " where";
 		String temp = "";
@@ -238,7 +251,7 @@ public class Customer {
 		List<BooksModel> searchedBooks = new LinkedList<BooksModel>();
 
 		try {
-			Statement stat = getCustConnection().createStatement();
+			Statement stat = conn.createStatement();
 			ResultSet rSet = stat.executeQuery(selectQuery);
 			while (rSet.next()) {
 				BooksModel bookTemp = new BooksModel();
@@ -252,6 +265,7 @@ public class Customer {
 				bookTemp.setThreshold(rSet.getInt(8));
 				searchedBooks.add(bookTemp);
 			}
+			DBFunctions.closeConnection(conn);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -272,6 +286,7 @@ public class Customer {
 	}
 
 	public void addToCart(int bookISBN, int quantity) {
+		Connection conn = DBFunctions.createConnection();
 		String selectQuery = "select * from books where ISBN = \"" + bookISBN + "\";";
 		Statement stat;
 		BooksModel curBook = new BooksModel();
@@ -296,6 +311,7 @@ public class Customer {
 					temp.setCartQuantity(quantity);
 				}
 			}
+			DBFunctions.closeConnection(conn);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -323,8 +339,7 @@ public class Customer {
 
 		try {
 			shoopingCart.clear();
-			getCustConnection().close();
-		} catch (SQLException e) {
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}

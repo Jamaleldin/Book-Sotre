@@ -15,11 +15,11 @@ public class DatabaseFunctions {
 	 * @param password
 	 * @return
 	 **/
-	public Connection createConnection(String dbName, String username, String password) {
-		String jdbcURL = "jdbc:mysql://127.0.0.1:3306/" + dbName + "?autoReconnect=true&useSSL=false";
+	public Connection createConnection(/*String dbName, String username, String password*/) {
+		String jdbcURL = "jdbc:mysql://127.0.0.1:3306/" + /*dbName*/"bookstore" + "?autoReconnect=true&useSSL=false";
 		Connection connection = null;
 		try {
-			connection = DriverManager.getConnection(jdbcURL, username, password);
+			connection = DriverManager.getConnection(jdbcURL, "root", "root");
 			connection.setAutoCommit(false);
 		} catch (SQLException e) {
 			System.out.println("ERROR CREATING CONNECTION:");

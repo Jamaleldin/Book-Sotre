@@ -179,7 +179,7 @@ public class CustomerMainPageController implements Initializable {
 
 	@FXML
 	void search(ActionEvent event) {
-
+		
 	}
 
 	@FXML
