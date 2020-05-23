@@ -1,18 +1,20 @@
 package application;
 
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXCheckBox;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.paint.Color;
+import mainClasses.DatabaseFunctions;
 
 public class UtilityFunctions {
-
+	private DatabaseFunctions DBFunctions = new DatabaseFunctions();
 	/**
 	 * Function to validate password entered by user.
 	 * 
@@ -58,19 +60,27 @@ public class UtilityFunctions {
 	 * 
 	 * @return
 	 * @throws ParseException
+	 * @throws SQLException
 	 */
-	public ObservableList<Book> getBooks() throws ParseException {
-		ObservableList<Book> books = FXCollections.observableArrayList();
-		String myDate = "2014-10-29";
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		Date date = sdf.parse(myDate);
-		books.add(new Book(1, "GOT", "George R.R. Martin", "HBO", "Fiction", 102.0, date, getSelectionBox()));
+	public ObservableList<BooksModel> getBooks() throws ParseException, SQLException {
+		Connection connection = DBFunctions.createConnection();
+		String selectQuery = "SELECT * FROM books NATURAL JOIN book_author;";
+		Statement stat = connection.createStatement();
+		ResultSet rSet = stat.executeQuery(selectQuery);
+		ObservableList<BooksModel> books = FXCollections.observableArrayList();
+		while (rSet.next()) {
+			BooksModel bookTemp = new BooksModel(rSet.getInt(1),rSet.getString(2)
+					,rSet.getString(9),rSet.getString(3),rSet.getString(6)
+					,rSet.getDouble(5),rSet.getString(4),getSelectionBox());
+			books.add(bookTemp);
+		}
+		DBFunctions.closeConnection(connection);
 		return books;
 	}
 
-	public ObservableList<Book> getCartBooks() {
-		ObservableList<Book> books = FXCollections.observableArrayList();
-		books.add(new Book("GOT", 102.0, getRemoveBtn()));
+	public ObservableList<BooksModel> getCartBooks() {
+		ObservableList<BooksModel> books = FXCollections.observableArrayList();
+		books.add(new BooksModel("GOT", 102.0, getRemoveBtn()));
 		return books;
 	}
 }

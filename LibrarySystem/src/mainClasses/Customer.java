@@ -8,10 +8,11 @@ import java.sql.Statement;
 import java.util.LinkedList;
 import java.util.List;
 
+import application.BooksModel;
+
 public class Customer {
 
 	private DatabaseFunctions DBFunctions;
-	private Connection custConnection;
 	private String username;
 	private String password;
 	private boolean status;
@@ -24,17 +25,8 @@ public class Customer {
 
 	public Customer() {
 		setDBFunctions(new DatabaseFunctions());
-		custConnection = null;
 		//setCustConnection(getDBFunctions().createConnection("bookstore", "root", "root"));
 		shoopingCart = new LinkedList<BooksModel>();
-	}
-
-	public Connection getCustConnection() {
-		return custConnection;
-	}
-
-	public void setCustConnection(Connection custConnection) {
-		this.custConnection = custConnection;
 	}
 
 	public DatabaseFunctions getDBFunctions() {
@@ -267,7 +259,6 @@ public class Customer {
 			}
 			DBFunctions.closeConnection(conn);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return searchedBooks;
@@ -291,7 +282,7 @@ public class Customer {
 		Statement stat;
 		BooksModel curBook = new BooksModel();
 		try {
-			stat = getCustConnection().createStatement();
+			stat = conn.createStatement();
 			ResultSet rSet = stat.executeQuery(selectQuery);
 
 			while (rSet.next()) {
@@ -313,7 +304,6 @@ public class Customer {
 			}
 			DBFunctions.closeConnection(conn);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 

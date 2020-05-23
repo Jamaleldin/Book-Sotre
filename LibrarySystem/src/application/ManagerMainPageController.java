@@ -2,6 +2,7 @@ package application;
 
 import java.net.URL;
 import java.sql.Date;
+import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.ResourceBundle;
 
@@ -73,31 +74,31 @@ public class ManagerMainPageController implements Initializable {
 	private JFXButton searchBtn;
 
 	@FXML
-	private TableView<Book> booksTable;
+	private TableView<BooksModel> booksTable;
 
 	@FXML
-	private TableColumn<Book, JFXCheckBox> selectCol;
+	private TableColumn<BooksModel, JFXCheckBox> selectCol;
 
 	@FXML
-	private TableColumn<Book, Integer> ISBNCol;
+	private TableColumn<BooksModel, Integer> ISBNCol;
 
 	@FXML
-	private TableColumn<Book, String> titleCol;
+	private TableColumn<BooksModel, String> titleCol;
 
 	@FXML
-	private TableColumn<Book, String> authorCol;
+	private TableColumn<BooksModel, String> authorCol;
 
 	@FXML
-	private TableColumn<Book, String> publisherCol;
+	private TableColumn<BooksModel, String> publisherCol;
 
 	@FXML
-	private TableColumn<Book, Date> pubYearCol;
+	private TableColumn<BooksModel, Date> pubYearCol;
 
 	@FXML
-	private TableColumn<Book, Double> priceCol;
+	private TableColumn<BooksModel, Double> priceCol;
 
 	@FXML
-	private TableColumn<Book, String> categoryCol;
+	private TableColumn<BooksModel, String> categoryCol;
 
 	@FXML
 	private JFXButton logoutBtn;
@@ -108,18 +109,18 @@ public class ManagerMainPageController implements Initializable {
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// Setting up the columns cell values
-		selectCol.setCellValueFactory(new PropertyValueFactory<Book, JFXCheckBox>("selectChbx"));
-		ISBNCol.setCellValueFactory(new PropertyValueFactory<Book, Integer>("ISBN"));
-		titleCol.setCellValueFactory(new PropertyValueFactory<Book, String>("title"));
-		authorCol.setCellValueFactory(new PropertyValueFactory<Book, String>("authorName"));
-		publisherCol.setCellValueFactory(new PropertyValueFactory<Book, String>("publisherName"));
-		pubYearCol.setCellValueFactory(new PropertyValueFactory<Book, Date>("publicationYear"));
-		priceCol.setCellValueFactory(new PropertyValueFactory<Book, Double>("price"));
-		categoryCol.setCellValueFactory(new PropertyValueFactory<Book, String>("category"));
+		selectCol.setCellValueFactory(new PropertyValueFactory<BooksModel, JFXCheckBox>("selectChbx"));
+		ISBNCol.setCellValueFactory(new PropertyValueFactory<BooksModel, Integer>("ISBN"));
+		titleCol.setCellValueFactory(new PropertyValueFactory<BooksModel, String>("title"));
+		authorCol.setCellValueFactory(new PropertyValueFactory<BooksModel, String>("authorName"));
+		publisherCol.setCellValueFactory(new PropertyValueFactory<BooksModel, String>("publisherName"));
+		pubYearCol.setCellValueFactory(new PropertyValueFactory<BooksModel, Date>("publicationYear"));
+		priceCol.setCellValueFactory(new PropertyValueFactory<BooksModel, Double>("price"));
+		categoryCol.setCellValueFactory(new PropertyValueFactory<BooksModel, String>("category"));
 		// Filling table with data
 		try {
 			booksTable.setItems(utils.getBooks());
-		} catch (ParseException e) {
+		} catch (ParseException | SQLException e) {
 			e.printStackTrace();
 		}
 	}

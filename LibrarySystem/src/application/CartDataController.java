@@ -31,23 +31,23 @@ public class CartDataController implements Initializable {
 	private JFXButton orderBtn;
 
 	@FXML
-	private TableView<Book> booksTable;
+	private TableView<BooksModel> booksTable;
 
 	@FXML
-	private TableColumn<Book, String> titleCol;
+	private TableColumn<BooksModel, String> titleCol;
 
 	@FXML
-	private TableColumn<Book, Double> priceCol;
+	private TableColumn<BooksModel, Double> priceCol;
 
 	@FXML
-	private TableColumn<Book, JFXButton> removalCol;
+	private TableColumn<BooksModel, JFXButton> removalCol;
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// Setting up the columns cell values
-		titleCol.setCellValueFactory(new PropertyValueFactory<Book, String>("title"));
-		priceCol.setCellValueFactory(new PropertyValueFactory<Book, Double>("price"));
-		removalCol.setCellValueFactory(new PropertyValueFactory<Book, JFXButton>("removeBtn"));
+		titleCol.setCellValueFactory(new PropertyValueFactory<BooksModel, String>("title"));
+		priceCol.setCellValueFactory(new PropertyValueFactory<BooksModel, Double>("price"));
+		removalCol.setCellValueFactory(new PropertyValueFactory<BooksModel, JFXButton>("removeBtn"));
 		// Filling table with data
 		booksTable.setItems(utils.getCartBooks());
 	}

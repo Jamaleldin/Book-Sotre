@@ -5,6 +5,8 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import application.BooksModel;
+
 public class DatabaseFunctions {
 	// Connection related functions
 	/**
@@ -15,8 +17,8 @@ public class DatabaseFunctions {
 	 * @param password
 	 * @return
 	 **/
-	public Connection createConnection(/*String dbName, String username, String password*/) {
-		String jdbcURL = "jdbc:mysql://127.0.0.1:3306/" + /*dbName*/"bookstore" + "?autoReconnect=true&useSSL=false";
+	public Connection createConnection() {
+		String jdbcURL = "jdbc:mysql://127.0.0.1:3306/" + "bookstore" + "?autoReconnect=true&useSSL=false";
 		Connection connection = null;
 		try {
 			connection = DriverManager.getConnection(jdbcURL, "root", "root");
@@ -45,13 +47,16 @@ public class DatabaseFunctions {
 	}
 
 	// Dealing with Database functions
-	public void insertBook(String tblName, BooksModel newBook, Connection connection) {
-		String insertBookQuery = "insert into " + tblName + " values (" + newBook.getISBN() + "," + "'"
+	public void insertBook(BooksModel newBook, Connection connection) {
+		String insertBookQuery = "insert into books values (" + newBook.getISBN() + "," +"\'" + newBook.getTitle() + "\'"+","+ "'"
 				+ newBook.getPublisherName() + "'" + "," + newBook.getPublicationYear() + "," + newBook.getPrice() + ","
 				+ "'" + newBook.getCategory() + "'" + "," + newBook.getNoCopies() + "," + newBook.getThreshold() + ");";
+		String insertAuthor = "insert into book_author values(" + newBook.getISBN() + "," + newBook.getAuthorName()
+				+ ");";
 		try {
 			Statement statement = connection.createStatement();
 			statement.execute(insertBookQuery);
+			statement.execute(insertAuthor);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

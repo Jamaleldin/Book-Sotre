@@ -1,23 +1,28 @@
 package application;
 
-import java.util.Date;
-
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXCheckBox;
 
-public class Book {
+public class BooksModel {
 	// Book details
-	int ISBN;
-	String title, authorName, publisherName, category;
-	Double price;
-	Date publicationYear;
+	private int ISBN;
+	private String title;
+	private String publisherName;
+	private String publicationYear;
+	private double price;
+	private String category;
+	private int noCopies;
+	private int threshold;
+	private String authorName;
+	private int cartQuantity;
+
 	// Action to be taken for the book, selection and removal
 	JFXButton removeBtn;
 	JFXCheckBox selectChbx;
 
 	// Constructor for tables that shows books information
-	public Book(int iSBN, String title, String authorName, String publisherName, String category, Double price,
-			Date publicationYear, JFXCheckBox selectChbx) {
+	public BooksModel(Integer iSBN, String title, String authorName, String publisherName, String category, Double price,
+			String publicationYear, JFXCheckBox selectChbx) {
 		super();
 		ISBN = iSBN;
 		this.title = title;
@@ -29,8 +34,13 @@ public class Book {
 		this.selectChbx = selectChbx;
 	}
 
+	// Constructor for books information
+	public BooksModel() {
+
+	}
+
 	// Constructor for Books in cart
-	public Book(String title, Double price, JFXButton removeBtn) {
+	public BooksModel(String title, Double price, JFXButton removeBtn) {
 		this.title = title;
 		this.price = price;
 		this.removeBtn = removeBtn;
@@ -84,12 +94,36 @@ public class Book {
 		this.price = price;
 	}
 
-	public Date getPublicationYear() {
+	public String getPublicationYear() {
 		return publicationYear;
 	}
 
-	public void setPublicationYear(Date publicationYear) {
+	public void setPublicationYear(String publicationYear) {
 		this.publicationYear = publicationYear;
+	}
+
+	public int getNoCopies() {
+		return noCopies;
+	}
+
+	public int getThreshold() {
+		return threshold;
+	}
+
+	public void setThreshold(int threshold) {
+		this.threshold = threshold;
+	}
+
+	public void setNoCopies(int noCopies) {
+		this.noCopies = noCopies;
+	}
+
+	public int getCartQuantity() {
+		return cartQuantity;
+	}
+
+	public void setCartQuantity(int cartQuantity) {
+		this.cartQuantity = cartQuantity;
 	}
 
 	public JFXButton getRemoveBtn() {

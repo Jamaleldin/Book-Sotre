@@ -5,6 +5,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import application.BooksModel;
+
 public class Manager extends Customer {
 
 	public Manager() {
@@ -31,9 +33,9 @@ public class Manager extends Customer {
 		return (rowsCount == 1);
 	}
 
-	public void insertBook(String tblName, BooksModel newBook) {
+	public void insertBook(BooksModel newBook) {
 		Connection conn = getDBFunctions().createConnection();
-		getDBFunctions().insertBook(tblName, newBook, conn);
+		getDBFunctions().insertBook(newBook, conn);
 		getDBFunctions().closeConnection(conn);
 	}
 
